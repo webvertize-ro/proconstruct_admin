@@ -345,7 +345,7 @@ function Admin() {
                                           const parsed = JSON.parse(
                                             field.value,
                                           );
-                                          return `${parsed.platform} - ${parsed.url}`;
+                                          return `${parsed.platform} - ${parsed.url} test`;
                                         } catch {
                                           return field.value;
                                         }
