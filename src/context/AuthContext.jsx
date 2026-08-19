@@ -1,7 +1,7 @@
 // The goal of this component is to make user and website_id available everywhere in the app with the hook useAuth
 
-import { createContext, useContext, useEffect, useState } from 'react';
-import supabase from '../services/supabase';
+import { createContext, useContext, useEffect, useState } from "react";
+import supabase from "../services/supabase";
 
 const AuthContext = createContext();
 
@@ -13,9 +13,9 @@ export const AuthProvider = ({ children }) => {
   // we create a function that will extract website_id from admins based on user_id
   async function getAdminData(userId) {
     const { data, error } = await supabase
-      .from('admins')
-      .select('website_id')
-      .eq('user_id', userId)
+      .from("admins")
+      .select("website_id")
+      .eq("user_id", userId)
       .single();
 
     if (error) {
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+      if (event === "SIGNED_IN" || event === "INITIAL_SESSION") {
         if (session?.user) {
           setTimeout(async () => {
             try {
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         }
       }
 
-      if (event === 'SIGNED_OUT') {
+      if (event === "SIGNED_OUT") {
         setUser(null);
         setWebsiteId(null);
         setLoading(false);
@@ -78,7 +78,7 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
 
   if (context === null) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
 
   return context;
